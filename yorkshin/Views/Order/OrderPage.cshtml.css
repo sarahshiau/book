@@ -1,0 +1,166 @@
+/*Info Area*/
+.Info-wrapper {
+    display: flex;
+    justify-content: center;/*水平置中*/
+    align-items: center; /*垂直置中*/
+    padding: 10vh 0px;
+}
+.Info-wrapper .Info-container{
+    width: 80vw;
+    height: auto;
+    padding: 10px 5vw;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius: 20px;
+    background-color: rgba(233,233,233,0.3);
+;
+}
+.Info-wrapper .Info-container .Info-upper{
+    padding: 20px;
+}
+
+.BookMark{
+    position: absolute;
+    top: 390px;
+    left: 160px;
+    width: 60px;
+}
+
+.Info-wrapper .Info-container .Info-upper .book-Info{
+    font-size: 22px;
+    font-weight: 600;
+}
+.Info-wrapper .Info-container .Info-upper .book-Info-2{
+    color: #b3b3b3;
+}
+.Info-wrapper .Info-buttom{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.Info-wrapper .Info-buttom .Info-img{
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+    height: 500px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+.Info-wrapper .Info-buttom img{
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+.Info-wrapper .Info-buttom .Info-content{
+    width: 30vw;
+    padding-left: 50px;
+}
+.Info-wrapper .Info-buttom .Info-content .Info-text-1{
+    border-bottom:#AEB2BA 1px solid;
+}
+.Info-wrapper .Info-buttom .Info-content .Info-order-area{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    padding-left: 45px;
+    margin-top:20px ;
+}
+.Info-wrapper .Info-buttom .Info-content .book-name{
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom: 3px;
+}
+
+.Info-wrapper .Info-buttom .Info-content .price{
+    font-size: 20px;
+    font-weight: 600;
+    color: #0000FF;
+    padding-bottom: 5px;
+}
+
+.Info-wrapper .Info-buttom .Info-content .Info-text-2{
+    padding-top: 10px;
+}
+
+.Info-wrapper .Info-buttom .Info-content .Info-order-area{
+    margin-top: 20px;
+    padding: 20px;
+}
+.Info-wrapper .Info-buttom .Info-content .Info-order-area button{
+    /*margin-right: 20px;*/
+    color: #0D6EFD;
+    border: #0D6EFD 1px solid;
+    transition: 0.5s;
+    padding: 10px 0px;
+    padding-left: 17px;
+}
+.Info-wrapper .Info-buttom .Info-content .Info-order-area button:hover {
+    color:#ffffff;
+    /*background-color: #0000FF;*/
+    box-shadow:  0 200px #0D6EFD inset;
+}
+
+.discriptionBox {
+    width: 90%;
+    height: 70px;
+    padding: 10px;
+    padding-top: 5px;
+    background-color: #ededed;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+#OrderBtn{
+    padding: 15px 120px 15px 120px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    /*background: rgba(0,0,0,0.8);*/
+    color: rgba(13, 110, 253, 0.8);
+    border: 2px solid rgba(13, 110, 253, 0.6);
+    transition: all .3s ease;
+}
+#OrderBtn:hover{
+    
+    transform: scale(1.125);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(3, 110, 253, 0.9);
+    background-color: rgba(13, 116, 255, 0.8);
+    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+    transition: all .2s ease;
+    
+}
+
+.ContentBox{
+    display: flex;
+    align-items: baseline;
+    padding-bottom: 3px;
+}
+.BoxContent{
+    font-size: 13px;
+    color: #1a1e21;
+}
+.BoxTitle{
+    font-size: 12px;
+    color: #6c6c6c;
+}
+
+.Area{
+    display: flex;
+    align-items: baseline;
+    padding-bottom: 4px;
+}
+
+.InfoContentTitle{
+    color: #858585;
+    font-size: 12px;
+    font-weight: normal;
+}
+/* ====== The End ====== */
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,143 @@
+
+@model yorkshin.ViewModels.CommentListViewModel
+
+@{
+    // 等待異步任務完成
+    var commentListViewModel = Model;
+    /*if comment id = null show add else edit*/
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+</svg>
+<div class="modal fade" id="CommentModal_@commentListViewModel.OrderId" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <div class="col">
+                      <h5 class="modal-title" id="exampleModalLabel">評價</h5>
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body overflow-auto">
+                  <form asp-controller="Comment" asp-action="EditComment" method="post" onsubmit="return validateCommentLength()">
+                      <div id="Edit_comment_@commentListViewModel.OrderId" class="start_comment">
+                          <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="star-rating" data-ranking="@commentListViewModel.Ranking">
+                                      @*<span id="comment_header">第 @commentListViewModel.CommentId 則留言</span>*@
+                                      <span id="comment_header">評分 </span>
+                                      @*<span class="rating-value"> @commentListViewModel.Ranking 分</span>*@
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <span id="ratingNum">@commentListViewModel.Ranking</span>
+                                      <input type="hidden" name="Ranking" class="form-control rating-value" value="@commentListViewModel.Ranking" required>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mb-2">
+                          <label style="font-weight: bolder">書籍名稱 : </label><span style="color: #5c636a">@commentListViewModel.BookName</span>
+                          <!-- <input type="text" class="form-control" placeholder="書籍名稱" name="Account" required> -->
+                      </div>
+                      <div class="mb-2">
+                          <label style="font-weight: bolder">作者名稱 : </label><span style="color: #5c636a">@commentListViewModel.BookAuthor</span>
+                          <!-- <input type="text" class="form-control" placeholder="作者名稱" name="" required> -->
+                      </div>
+                      <div class="mb-2 has-validation">
+                          <!-- 新增隱藏的 comment_id 欄位 -->
+                          <input type="hidden" name="CommentId" value="@commentListViewModel.CommentId"/>
+                          @*<input type="hidden" name="CommentId" value="@commentListViewModel.CommentId" />*@
+                          <input type="hidden" name="OrderId" value="@commentListViewModel.OrderId"/>
+                          <label class="mb-2" style="font-weight: bolder" for="Comment_textarea" >評論</label>
+                          <textarea  class="form-control" id="Comment_textarea" name="BuyerReview" placeholder="請輸入100個字以內" rows="5" aria-describedby="validationTooltipUsernamePrepend" value = "@commentListViewModel.BuyerReview" required >@commentListViewModel.BuyerReview</textarea>
+                          <div id= "CommentLimit" class="m-lg-2 align-items-center" style="color: #d13737" hidden>
+                              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                              <small>請輸入100字以內</small>
+                          </div>
+                      </div>
+                      <button type="submit" class="UpdateBtn btn btn-primary">確定並提交</button>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+<!-- 在你的頁面中的合適位置引入 jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function validateCommentLength() {
+        // 取得評論內容
+        var commentText = document.getElementById('Comment_textarea').value;
+
+        // 檢查評論長度是否超過 100
+        if (commentText.length > 100) {
+            // 顯示 評論長度限制的警告
+            document.getElementById('CommentLimit').removeAttribute('hidden');
+            return false; // 阻止表單提交
+        }
+
+        // 隐藏评论长度限制警告
+        document.getElementById('CommentLimit').setAttribute('hidden', 'true');
+        return true; // 允许表單提交
+    }
+    $(document).ready(function () {
+        let starRatingContainer = $('#Edit_comment_@commentListViewModel.OrderId .star-rating');
+        let stars = starRatingContainer.find('.fa');
+
+        // 取得初始評分值
+        let initialRating = parseInt(starRatingContainer.data('ranking'));
+
+        // 設定初始填滿狀態
+        stars.slice(0, initialRating).removeClass('fa-star-o').addClass('fa-star');
+        stars.slice(initialRating).removeClass('fa-star').addClass('fa-star-o');
+
+        stars.on('click', function () {
+            let clickedIndex = stars.index(this);
+
+            // 填滿被點擊的星星及之前的星星
+            stars.removeClass('fa-star-o fa-star').addClass('fa-star');
+            stars.slice(0, clickedIndex + 1).removeClass('fa-star-o').addClass('fa-star');
+
+            // 將後面的星星設為空星
+            stars.slice(clickedIndex + 1).removeClass('fa-star').addClass('fa-star-o');
+
+            // 更新評分數值
+            let ratingValue = clickedIndex + 1;
+            $('#Edit_comment_@commentListViewModel.OrderId #ratingNum').text(ratingValue);
+            starRatingContainer.find('.rating-value').val(ratingValue);
+        });
+    });
+</script>
+
+}
+<style>
+    .UpdateBtn{
+        /*width: 100%;*/
+        /*height: 100%;*/
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        cursor: pointer;
+        font-weight: bold;
+        background: rgba(13, 110, 253,0.8);
+        color: rgba(255,255,255, 0.8);
+        border: 2px solid rgba(13, 110, 253, 0.6);
+        transition: all .3s ease;
+    }
+    .UpdateBtn:hover{
+        transform: scale(1.125);
+        color: rgba(255, 255, 255, 0.9);
+        border-color: rgba(3, 110, 253, 0.9);
+        background-color: rgba(13, 116, 255, 0.8);
+        filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+        transition: all .2s ease;
+    }
+</style>

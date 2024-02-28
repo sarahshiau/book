@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+@{
+    ViewData["Title"] = "系統管理員編輯書籍";
+}
+
+<body><br/><br/>
+<style>
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+        h2{
+            position: absolute;
+            font-size: 26px;
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            top: 40px
+        }
+        body {
+            background-image: url('/Images/Background.png');
+            background-position: center;
+            height: 100px;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .white-rectangle {
+            width: 1000px;
+            height: 500px; 
+            background-color: rgba(255, 255, 255, 0.5); 
+            border-radius: 10px; 
+            
+        }
+        .AddButton {
+            width: 85px;
+            height: 35px;
+            position: relative;
+            left: 278px;
+            top: 4px;
+            border-radius: 24px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-weight: bold;
+            background: rgba(0,0,0,0.8);
+            color: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            transition: all .3s ease;
+        }
+        .AddButton:hover{
+            /*transform: scale(1.125);*/
+            color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.9);
+            transition: all .3s ease;
+        }
+                
+        .Cancelbutton {
+            width: 150px;
+            height: 50px;
+            border-radius: 24px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-weight: bold;
+            background: rgba(0,0,0,0.8);
+            color: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0, 0, 0, 0.6);
+            transition: all .3s ease;
+        }
+        .Cancelbutton:hover{
+            transform: scale(1.125);
+            color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.9);
+            transition: all .3s ease;
+        }
+        .Confirmbutton {
+            width: 150px;
+            height: 50px;
+            border: 2px solid blue;
+            background-color: #e0e0e0;
+            color: blue;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        input[type="text"] {
+           border: none;
+           border-bottom: 1px solid black;
+           outline: none;
+           background-color: rgba(255, 255, 255, 0.5);
+           padding: 5px;
+           margin-left: 80px;
+           width: 200px;
+           height: 45px;
+           border-radius: 5px;
+        }
+        .newButton{
+            width: 100px;
+            height: 45px;
+            background-color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 15px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
+        .newButton:hover{
+            transform: scale(1.1);
+            transition: all .2s ease;
+        }
+    </style>
+<br/><br/><br/>
+@model List<yorkshin.ViewModels.ClassifyViewModel>
+<form method="post" asp-controller="Classification" asp-action="AddCategory">
+    <div class="container">
+        <h1>編 輯 書 籍 分 類</h1>
+    </div>
+    <div class="ClassifyAddBtnGroup d-flex justify-content-end">
+        @* <input type="text" name="Primary" id="inputText" placeholder="輸入分類" required > *@
+        <button type="submit" onclick="addClass()" class="AddButton" type="button">新增分類</button>
+        <input type="text" name="Secondary" id="inputText" placeholder="輸入分類" required >
+    </div>
+</form>
+
+<br/>
+<div class="container">
+    <div class="white-rectangle row align-items-end justify-content-center pb-3">
+        <h2>書 籍 狀 況</h2>
+        <div>
+            @foreach (var classify in Model)
+            {
+                <button type="button" class="newButton mb-3" onclick="getDeleteCid(@classify.CId)">X @classify.Secondary</button>
+            }
+        </div>
+        
+        <br/>
+        <button class="Cancelbutton">回 上 頁</button>
+    </div>
+</div>
+<script>
+
+    function getDeleteCid(CId) {
+        console.log(CId)
+        $.ajax({
+            url: '/Classification/DeleteCategory',
+            type: 'POST',
+            data: {CId: CId},
+            success: function () {
+               location.reload();
+            }
+        })
+    }
+    $(".Cancelbutton").on("click", function () {
+        window.location.replace("http://localhost:5065/Classification/ClassifyByManager");
+    });
+
+</script>
+
+</body>

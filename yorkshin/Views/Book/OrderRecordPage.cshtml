@@ -1,0 +1,58 @@
+@{
+    ViewBag.Title = "訂單紀錄";
+    Layout = "_AsiLayout";
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
+<div class="container-fluid">
+    <div class="list-field pt-5">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            @*OrderedList Area*@
+            <li class="nav-item " role="presentation">
+                <button class="nav-link active" id="orderedList-tab" data-bs-toggle="tab" data-bs-target="#orderedList" type="button" role="tab" aria-controls="orderedList" aria-selected="true">已下單清單</button>
+            </li>
+            @*FinishedList Area*@
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="finishedList-tab" data-bs-toggle="tab" data-bs-target="#finishedList" type="button" role="tab" aria-controls="finishedList" aria-selected="false">已完成清單</button>
+            </li>
+             @*FinishedList Area*@
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="CommentForBuyer-tab" data-bs-toggle="tab" data-bs-target="#CommentForBuyer" type="button" role="tab" aria-controls="CommentForBuyer" aria-selected="false">評論</button>
+            </li>
+
+            @* <li class="nav-item dropdown ms-auto"> *@
+            @*     <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">排序</button> *@
+            @*     $1$ sorting #1# *@
+            @*     <ul class="dropdown-menu"> *@
+            @*         <li> *@
+            @*             <button class="dropdown-item" href="#"></button> *@
+            @*         </li> *@
+            @*     </ul> *@
+            @* </li> *@
+        </ul>
+        <div class="tab-content min-vh-100" id="content">
+           
+            
+            @* OrderedList Area *@
+            <div class="tab-pane fade active show" id="orderedList" role="tabpanel" aria-labelledby="orderedList-tab">
+                @await Component.InvokeAsync("OrderedListPartial")
+                @*@await Component.InvokeAsync("OrderedListPartial", new { userId })*@
+                <vc:OrderedListPartialViewComponent></vc:OrderedListPartialViewComponent>
+            </div>
+            @* FinishedList Area*@
+            <div class="tab-pane fade" id="finishedList" role="tabpanel" aria-labelledby="finishedList-tab">
+                @await Component.InvokeAsync("FinishedListPartial")
+                <vc:FinishedListPartialViewComponent></vc:FinishedListPartialViewComponent>
+            </div>
+            <div class="tab-pane fade" id="CommentForBuyer" role="tabpanel" aria-labelledby="CommentForBuyer-tab">
+                @await Component.InvokeAsync("CommentPartialforBuyer")
+                <vc:CommentPartialforBuyerViewComponent></vc:CommentPartialforBuyerViewComponent>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+@* import script *@
+@* <script src='@Url.Content("~/Scripts/BookListPage.js")'></script> *@
+<script src="~/Scripts/OrderRecordPage.js"></script>

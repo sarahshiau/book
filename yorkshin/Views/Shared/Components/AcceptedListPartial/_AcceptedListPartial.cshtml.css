@@ -1,0 +1,322 @@
+.search-input {
+    width: 300px;
+    border: none;
+}
+
+.search-input:focus {
+    box-shadow: none;
+}
+
+.btn:focus {
+    box-shadow: none;
+    outline: none !important;
+}
+
+.search-box {
+    border: 1px solid grey;
+    width: fit-content !important;
+    border-radius: 5px;
+}
+
+.search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    width: 28px;
+    background-color: #536bf6;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-btn:hover {
+    cursor: pointer;
+    background-color: #536bf6;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.file-btn:hover .clicked-label {
+    cursor: pointer;
+}
+
+.clicked-label {
+    background-color: white;
+    border: none;
+    color: #1D4ED8;
+}
+
+.file-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 106px;
+    height: 106px;
+    color: #1D4ED8;
+    background: #FFF;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    /*float: left;*/
+}
+
+#imgResult {
+    max-height: 250px;
+    width: auto;
+    /*float: right;*/
+}
+
+#input-file{
+    display: none;
+}
+
+/**************************card area****************************/
+.CardTitle{
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    padding-bottom: 50px;
+}
+.CardTitle h2{
+    color: #fff;
+}
+.card-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    /*font-family: 'Times New Roman', Times, serif;*/
+    margin: 20px 0;
+}
+
+.card-wrapper .card-container {
+    width: 100%;
+    height: 250px;
+    padding: 10px 10px;
+    padding-left: 20px;
+    margin: 10px 20px;
+    /*border: #000000 1px solid;*/
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直置中 */
+    align-items: center; /* 水平置中 */
+    background-color: rgba(233,233,233,0.3);
+    border-radius : 20px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+.card-wrapper .card-container:hover {
+    transform: translateY(-2px);
+    box-shadow: rgb(0 0 0 / 25%) 0px 0.0625em 0.0625em, rgb(0 0 0 / 25%) 0px 0.125em 0.5em, rgb(255 255 255 / 10%) 0px 0px 0px 1px inset;
+}
+.card-wrapper .card-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.card-wrapper .card-container .card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16%;
+}
+.card-wrapper .card-container .card-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    padding-left: 30px;
+}
+
+.card-wrapper .card-container .card-right .card-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0;
+    padding-bottom: 100%;
+    background-color: #eaeaea;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+.card-wrapper .card-container .card-right .card-img img {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+}
+
+
+.card-wrapper .card-container .card-account {
+    /*height: 20%;*/
+    font-size: 0.9em; /* 使用相對單位，比例可根據需要調整 */
+    font-weight: 400;
+    color: #313131;
+    padding: 0px 5px;
+
+    white-space: nowrap; /* 防止文字換行 */
+    overflow: hidden; /* 隱藏超出容器的部分 */
+    text-overflow: ellipsis; /* 顯示省略號 */
+}
+
+.card-wrapper .card-container .card-Info .card-name {
+    /*height: 20%;*/
+    font-size: 1.2em;
+    font-weight: bolder;
+    line-height: 22px;
+    margin-top: 10px;
+    padding: 2px 0px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-wrapper .card-container .card-Info .card-author {
+    /*height: 20%;*/
+    font-size: 0.8em;
+    color: #7c7c7c;
+    line-height: 15px;
+    /*margin-bottom: 10px;*/
+    padding: 2px 0px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-wrapper .card-container .card-price {
+    /*height: 20%;*/
+    font-size: 1.1em;
+    font-weight: 600;
+    color: rgba(13, 110, 253, 1);
+
+    white-space: nowrap; /* 防止文字換行 */
+    overflow: hidden; /* 隱藏超出容器的部分 */
+    text-overflow: ellipsis; /* 顯示省略號 */
+}
+
+.card-wrapper .card-container .card-btns {
+    /*height: 20%;*/
+    display: flex;
+    flex-direction: row;
+    margin: 0px 0px 10px;
+}
+
+.card-wrapper .card-container .card-btns .btn-y {
+    margin: 10px 10px 0px 0px;
+}
+
+.card-wrapper .card-container .card-btns .btn-n {
+    margin: 10px 10px 0px 0px;
+}
+
+.card-wrapper .card-container .card-btns .btn-n .btn {
+    color: #000000;
+    border: #000000 1px solid;
+}
+
+.card-wrapper .card-container .card-btns .btn-n :hover{
+    color: #ffffff;
+    background-color: #2e2e2e;
+}
+
+
+/*字體樣式*/
+.BookClassIfyInfo{
+    padding: 5px 0px;
+    font-size: 0.8em;
+}
+
+.BookClassIfyInfo .BookStatus{
+    font-size: 1em;
+    color: #7c7c7c;
+}
+
+.BookClassIfyInfo .BookDep{
+    font-weight: 500;
+}
+
+/*編輯刪除按鈕*/
+#RejectBtn{
+    /*width: 100%;*/
+    /*height: 100%;*/
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    /*background: rgba(220, 53, 69.8);*/
+    color: rgba(0,0,0, 0.9);
+    border: 2px solid rgba(0,0,0, 0.6);
+    transition: all .3s ease;
+}
+
+#RejectBtn:hover{
+    transform: scale(1.1);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0,0,0, 0.9);
+    background-color: rgba(0,0,0,.8);
+    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+    transition: all .2s ease;
+}
+
+#StatusBtn{
+    /*width: 100%;*/
+    /*height: 100%;*/
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgba(0, 103, 55);
+    background-color: #e2e2e2;
+    border: 2px solid rgba(25, 135, 84, 0.9);
+    transition: all .3s ease;
+}
+#StatusBtn:hover{
+    transform: scale(1.125);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(25, 135, 84, 0.9);
+    background-color: rgba(52, 148, 108, 0.8);
+    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+    transition: all .2s ease;
+}
+
+
+/* 響應式設計 */
+@media screen and (max-width: 600px) {
+    .card-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .card-wrapper .card-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .card-wrapper .card-content {
+        flex-direction: column;
+    }
+
+    .card-wrapper .card-container .card-right {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

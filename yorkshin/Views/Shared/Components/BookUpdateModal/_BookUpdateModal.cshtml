@@ -1,0 +1,208 @@
+@model yorkshin.ViewModels.BookViewModel
+@{
+    List<string> departmentArr = ViewBag.DepartmentArray;
+    List<string> courseArr = ViewBag.CourseArray;
+    List<string> statusArray = ViewBag.StatusArray;
+    var selectedCourse = String.Join(",", Model.selectedCourse);
+    var selectedDep = String.Join(",", Model.selectedDep);
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
+<div class="modal fade" id="updateBookModal_@Model.Bid" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col">
+                    <h5 class="modal-title" id="exampleModalLabel">書籍資訊</h5>
+                    <span>修改您的書籍資訊</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" asp-controller="Book" asp-action="UpdateBook" method="post" enctype="multipart/form-data">
+                    <input id="bookStatus" type="text" value="@Model.BookStatus" hidden/>
+                    <input type="number" name="Bid" value="@Model.Bid" hidden/>
+                    <input type="text" id="selectedCourse" value="@selectedCourse" hidden/>
+                    <input type="text" id="selectedDep" value="@selectedDep" hidden/>
+                    <input type="text" name="DepartmentList" id="departmentValue" hidden/>
+                    <input type="text" name="CourseList" id="courseValue" hidden/>
+                    <div class="row gx-3">
+                        <div class="mb-3 col-4">
+                            <label class="form-label">書名</label>
+                            <input type="text" class="form-control" name="BName" value="@Model.BName" required/>
+                        </div>
+                        <div class="mb-3 col">
+                            <label class="form-label">作者</label>
+                            <input type="text" class="form-control" name="Author" value="@Model.Author" required/>
+                        </div>
+                    </div>
+                    <div class="row gx-3">
+                        <div class="mb-3 col-4">
+                            <label class="form-label">價格</label>
+                            <input type="number" class="form-control" name="Price" value="@Model.Price" required/>
+                        </div>
+                        <div class="mb-3 col">
+                            <label class="form-label">ISBN</label>
+                            <input type="text" class="form-control" name="Isbn" value="@Model.Isbn" required/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">類別</label>
+                        <div class="row">
+                            <div class="col category-area">
+                                <label class="form-label me-2">系所</label>
+                                <button class="btn dropdown-toggle" id="departmentDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">@selectedDep</button>
+                                <ul class="dropdown-menu ps-2" aria-labelledby="multiSelectDropdown" id="department">
+                                    @foreach (var item in @Model.selectedDep)
+                                    {
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" checked value="@item"/>@item
+                                            </label>
+                                        </li>
+                                    }
+                                    @foreach (var department in departmentArr)
+                                    {
+                                        if (!Model.selectedDep.Contains(department))
+                                        {
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" value="@department" id="@department">@department
+                                                </label>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <label class="form-label me-2">課程</label>
+                                <button class="btn dropdown-toggle" id="courseDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">@selectedCourse</button>
+                                <ul class="dropdown-menu ps-2" aria-labelledby="multiSelectDropdown" id="course">
+                                    @foreach (var item in @Model.selectedCourse)
+                                    {
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" checked value="@item"/>@item
+                                            </label>
+                                        </li>
+                                    }
+                                    @foreach (var course in courseArr)
+                                    {
+                                        if (!Model.selectedCourse.Contains(course))
+                                        {
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" value="@course" id="@course">@course
+                                                </label>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">書籍狀態</label>
+                        @* @Html.DropDownListFor(model => model.BookStatus, Model.BookStatusOptions, new { @class = "form-select", required = "required" }) *@
+                        <select class="form-select" name="BookStatus" id="description-select" required>
+                            <option id="selectSelected" value="@Model.BookStatus" selected>@Model.BookStatus</option>
+                            @foreach (var item in statusArray)
+                            {
+                                if (item != Model.BookStatus)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">備註</label>
+                        <input class="form-control" type="text" name="Description" value="@Model.Description" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">書籍圖片</label>
+                        <div class="col ms-3">
+                            <div class="row mb-3">
+                                 <div class="input-group file-btn"> 
+                                    <label for="input-file-@Model.Bid" class="clicked-label"> 
+                                        <i class="material-symbols-outlined">add_photo_alternate</i> 
+                                    </label> 
+                                    <label class="input-group-text clicked-label" for="input-file-@Model.Bid">新增圖片</label> 
+                                     <input type="file" name="Img" class="form-control border-0" id="input-file-@Model.Bid" accept="image/*" hidden/>  
+                                </div> 
+                                @*<input type="file" name="Img" class="form-control border-0" accept="image/*"/>*@
+                            </div>
+                            <img id="imageResult_@Model.Bid" alt="" src="#" class="row img-fluid mb-3">
+                            <button type="submit" id="ConfirmBtn_@Model.Bid" class="UpdateBtn row btn" >確定修改</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="CancelBtn" class="btn" data-bs-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script src="~/Scripts/BookUpdateModal.js"></script>*@
+<script>
+/*const originalCourseList = $('#updateBookModal_@Model.Bid #selectedCourse').val().split(',')
+const originalDepList = $('#updateBookModal_@Model.Bid #selectedDep').val().split(',')*/
+$(document).ready(function () {
+    let courseList = [];
+    let departmentList = [];
+    // $('#description-select').on('change', function () {
+    //     console.log(this.value);
+    // })
+    const departmentCheckboxes = $('#updateBookModal_@Model.Bid #department input[type="checkbox"]');
+    const courseCheckboxes = $('#updateBookModal_@Model.Bid #course input[type="checkbox"]')
+    const departmentDropdown = $('#updateBookModal_@Model.Bid #departmentDropdown');
+    const courseDropdown = $('#updateBookModal_@Model.Bid #courseDropdown');
+
+    function handleCourse() {
+        courseList = [];
+        let courseBtnText = '';
+
+        courseCheckboxes.each(function () {
+            if ($(this).prop('checked')) {
+                courseList.push($(this).val());
+                courseBtnText += $(this).val() + ', ';
+            }
+        });
+        courseDropdown.text(courseList.length > 0 ? courseBtnText.slice(0, -2) : '請選擇');
+    }
+
+    function handleDepartment() {
+        departmentList = [];
+        let departmentBtnText = '';
+
+        departmentCheckboxes.each(function () {
+            if ($(this).prop('checked')) {
+                departmentList.push($(this).val());
+                departmentBtnText += $(this).val() + ', ';
+            }
+        });
+        departmentDropdown.text(departmentList.length > 0 ? departmentBtnText.slice(0, -2) : '請選擇');
+    }
+
+    courseCheckboxes.on('change', handleCourse)
+    departmentCheckboxes.on('change', handleDepartment);
+    $('#ConfirmBtn_@Model.Bid').on('click',function (){
+        const departmentString = departmentList.join(',');
+        const courseString = courseList.join(',');
+        $('#updateBookModal_@Model.Bid #departmentValue').val(departmentString);
+        $('#updateBookModal_@Model.Bid #courseValue').val(courseString);
+        console.log(departmentString);
+    })
+    let imgOutput = document.getElementById('imageResult_@Model.Bid');
+    $('#input-file-@Model.Bid').on('change', function (e) {
+        let fileReader = new FileReader();
+        fileReader.onload = function () {
+            imgOutput.src = fileReader.result;
+        }
+        fileReader.readAsDataURL(e.target.files[0]);
+    })
+})
+
+</script>

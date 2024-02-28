@@ -1,0 +1,24 @@
+.star-rating {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 32px;
+    font-size: 1.25em;
+    font-weight: bolder;
+    border-color: #F24E1E;
+    color: #F24E1E;
+    background-color: #F24E1E0A;
+}
+
+.star-rating .fa-star {
+    color: #F24E1E;
+}
+
+button {
+    width: 100px;
+}
+
+
+/* comment start*/
+.comment-start {
+    color: #F24E1E;
+}

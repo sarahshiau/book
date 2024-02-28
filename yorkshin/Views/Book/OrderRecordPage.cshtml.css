@@ -1,0 +1,214 @@
+.search-input {
+    width: 300px;
+    border: none;
+}
+
+.search-input:focus {
+    box-shadow: none;
+}
+
+.btn:focus {
+    box-shadow: none;
+    outline: none !important;
+}
+
+.search-box {
+    border: 1px solid grey;
+    width: fit-content !important;
+    border-radius: 5px;
+}
+
+.search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    width: 28px;
+    background-color: #536bf6;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-btn:hover {
+    cursor: pointer;
+    background-color: #536bf6;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.file-btn:hover .clicked-label {
+    cursor: pointer;
+}
+
+.clicked-label {
+    background-color: white;
+    border: none;
+    color: #1D4ED8;
+}
+
+.file-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 106px;
+    height: 106px;
+    color: #1D4ED8;
+    background: #FFF;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    /*float: left;*/
+}
+
+#imgResult {
+    max-height: 250px;
+    width: auto;
+    /*float: right;*/
+}
+
+#input-file{
+    display: none;
+}
+
+/*card area*/
+.card-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.card-wrapper .card-container {
+    width: 400px;
+    height: 200px;
+    padding: 20px;
+    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: #000000 1px solid;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直置中 */
+    align-items: center; /* 水平置中 */
+    border-radius: 5px;
+}
+
+.card-wrapper .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.card-wrapper .card-container .card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+}
+
+.card-wrapper .card-container .card-right .card-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0;
+    padding-bottom: 100%;
+    background-color: #eaeaea;
+    position: relative;
+}
+
+.card-wrapper .card-container .card-right .card-img img {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.card-wrapper .card-container .card-account {
+    font-size: 0.9em; /* 使用相對單位，比例可根據需要調整 */
+    font-weight: bold;
+}
+
+.card-wrapper .card-container .card-Info .card-name {
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+.card-wrapper .card-container .card-Info .card-author {
+    font-size: 0.5em;
+    color: #7c7c7c;
+}
+
+.card-wrapper .card-container .card-price {
+    font-size: 1.2em;
+    font-weight: 900;
+    color: #0000FF;
+}
+
+.card-wrapper .card-container .card-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-wrapper .card-container .card-btns .btn-y {
+    margin: 10px;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.card-wrapper .card-container .card-btns .btn-n {
+    margin: 10px;
+    margin-bottom: 0;
+}
+
+.card-wrapper .card-container .card-btns .btn-n .btn {
+    color: #000000;
+    border: #000000 1px solid;
+}
+
+.card-wrapper .card-container .card-btns .btn-n :hover {
+    color: #ffffff;
+    background-color: #2e2e2e;
+}
+
+/* 響應式設計 */
+@media screen and (max-width: 600px) {
+    .card-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .card-wrapper .card-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .card-wrapper .card-content {
+        flex-direction: column;
+    }
+
+    .card-wrapper .card-container .card-right {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Tab */
+.nav-tabs .nav-item .nav-link:hover{
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    border-radius: 10px;
+}
+.nav-tabs .nav-item .active{
+    font-weight: 500;
+    border-color: #fff #fff #1D4ED8;
+    border-bottom: #000000 3px solid;
+    transition: ease .3s;
+}

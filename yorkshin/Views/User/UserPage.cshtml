@@ -1,0 +1,144 @@
+@{
+    ViewBag.Title = "個人資訊";
+    Layout = "_AsiLayout";
+}
+@model yorkshin.ViewModels.UserViewModel
+@* <form asp-controller="Comment" asp-action="EditComment" method="post" onsubmit="return validateCommentLength()">*@
+<div id= "EditUserResult" class="m-lg-2 align-items-center" style="color: #d13737" hidden>
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <small>請輸入100字以內</small>
+</div>
+<div class="userPage-form" >
+    <div id="userPageForm">
+        <div class="userPage-input-group">
+            <label class="UserPageTitle form-label">帳號</label><br>
+            <label class="Account form-label">@Model.Account</label>
+        </div>
+        <input type="text" value="@Model.Account" hidden name="Account"/>
+        <input type="text" class="form-control" name="Identity" value="@Model.Identity" hidden>
+        <div class="userPage-input-group">
+            <label class="UserPageTitle form-label">使用者名稱</label>
+            <input type="text" class="form-control" name="UName" value="@Model.UName" required>
+        </div>
+        <div class="userPage-input-group">
+            <label class="UserPageTitle form-label">密碼</label>
+            <input type="password" class="form-control" name="Pwd" value="@Model.Pwd"  required>
+        </div>
+        <div class="userPage-input-group">
+            <label class="UserPageTitle form-label">Email</label>
+            <input type="email" class="form-control" name="Email"  value="@Model.Email" aria-describedby="emailHelp">
+        </div>
+        <div class="userPage-input-group">
+            <label class="UserPageTitle form-label">手機號碼</label>
+            <input type="text" class="form-control" name="Phone"  value="@Model.Phone" required>
+        </div>
+        <div class="UserPageBtn d-flex justify-content-center">
+            <button type="submit" class="userPage-btn">修改</button>
+        </div>
+    </div>
+</div>
+<style>
+body {
+    
+    background-position: center;
+    background-size: 80%;
+}
+.userPage-form {
+  background-color: rgba(255,255,255,0.64);
+  position: relative;
+  width: 70%;
+  height: 768px;
+  margin: 0 auto;
+  padding-top: 100px;
+  ;
+}
+.userPage-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: 5px;
+    text-align: center;
+}
+.userPage-input{
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+.userPage-input-group {
+    margin: auto;
+    width: 70%;
+    padding-bottom: 20px;
+}
+
+.userPage-btn {
+    padding: 12px 40px;
+    border-radius: 24px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    background: rgba(0,0,0,0.8);
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    transition: all .3s ease;
+    margin: 40px 0;
+}
+.userPage-btn:hover{
+    transform: scale(1.125);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    transition: all .3s ease;
+    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+}
+
+.Account{
+    color: #9b9b9b;
+    font-weight: 400;
+    padding-left: 15px;
+}
+
+.UserPageTitle{
+    font-weight: 500;
+    color: #313131;
+    margin-bottom: 2px;
+}
+
+</style>
+<script src='@Url.Content("~/Scripts/UserModule.js")'></script>
+<script>
+// $(document).ready(function () {
+//     $('#userPage-form').submit(function (e) {
+//         e.preventDefault(); // 阻止默认的表单提交行为
+//
+//         $.ajax({
+//             url: $(this).attr('action'),
+//             method: $(this).attr('method'),
+//             data: $(this).serialize(),
+//             success: function (response) {
+//                 if (response.message === 'success') {
+//                     // 处理成功的情况
+//                     console.log('修改成功');
+//                     alert("修改成功");
+//                     RedirectToUserPage(); // 修正函数名
+//                 } else if (response.message === 'fail') {
+//                     // 处理失败的情况
+//                     alert("修改失敗");
+//                     console.log('修改失敗');
+//                 }
+//             },
+//             error: function () {
+//                 console.log('AJAX 请求出错');
+//             }
+//         });
+//     });
+// });
+//
+// function RedirectToUserPage() {
+//        $.get('/User/UserPage', function() {
+//        // 在成功後進行重定向到 LoginPage
+//            window.location.href = '/User/UserPage';
+//    });
+// }
+
+</script>

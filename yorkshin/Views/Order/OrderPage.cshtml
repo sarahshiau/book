@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "書籍商品資訊";
+    Layout = "_AsiLayout";
+}
+
+<!-- ##### Info Start ##### -->
+@model yorkshin.ViewModels.BookViewModel
+<div class="Info-wrapper">
+    <form id="AddOrder-form" asp-controller="Order" asp-action="AddOrder" method="post" enctype="multipart/form-data">
+        <div class="Info-container">
+            <div class="Info-upper">
+                <svg class="BookMark" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 24 24">
+                    <path d="M 6 2 C 5.861875 2 5.7278809 2.0143848 5.5976562 2.0410156 C 4.686084 2.2274316 4 3.033125 4 4 L 4 22 L 12 19 L 20 22 L 20 4 C 20 3.8625 19.985742 3.7275391 19.958984 3.5976562 C 19.799199 2.8163086 19.183691 2.2008008 18.402344 2.0410156 C 18.272119 2.0143848 18.138125 2 18 2 L 6 2 z"></path>
+                </svg>
+                <div class="book-Info">書籍資訊</div>
+                <div class="book-Info-2">二手書的詳細書籍資訊</div>
+            </div>
+            <div class="Info-buttom">
+                <div class="Info-img">
+                    <img src="/Images/Upload/@Model.ImgUrl" alt="@Model.Bid">
+                </div>
+                <div class="Info-content">
+                    <div class="Info-text-1">
+                        <div class="book-name">@Model.BName</div>
+                        <div class="price">NT$ @Model.Price</div>
+                    </div>
+                    <div class="Info-text-2">
+                        <div class="ContentBox">
+                            <div class="BoxTitle">作者：</div>
+                            <div class="auther BoxContent">@Model.Author</div>
+                        </div>
+                        <div class="ContentBox">
+                            <div class="BoxTitle BoxContent">書籍狀況：</div>
+                            <div class="book-condition BoxContent">@Model.BookStatus</div>
+                        </div>
+                        <div class="ContentBox">
+                            <div class="BoxTitle">系所：</div>
+                            <div class="BoxContent book-condition">@string.Join(", ", Model.selectedDep)</div>
+                        </div>
+                        <div class="ContentBox">
+                            <div class="BoxTitle">課程：</div>
+                            <div class="BoxContent book-condition">@string.Join(", ", Model.selectedCourse)</div>
+                        </div>
+                        <div class="ContentBox">
+                            <div class="BoxTitle">賣家：</div>
+                            <div class="seller BoxContent">@Model.Seller</div>
+                        </div>
+                        <div class="ContentBox">
+                            <div class="BoxTitle">描述：</div>
+                            <div class="discriptionBox">
+                                <div class="discription BoxContent">@Model.Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Info-order-area justify-content-center ">
+                        <input type="hidden" name="bookID" value="@Model.Bid"/>
+                        <input type="hidden" name="buyerID" value="@ViewBag.BuyerId"/>
+                        <button type="submit" id="OrderBtn" class="btn">下單</button>
+                        <div class="bargan-area">
+                            <div class="row g-3 align-items-center">
+                                @*<div class="col-auto">
+                                        <label for="inputPassword6" class="col-form-label">議價：</label>
+                                    </div>*@
+                                @*<div class="col-auto">
+                                        <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<script src='@Url.Content("~/Scripts/AddOrder.js")'></script>
+<!-- ##### Info End ##### -->

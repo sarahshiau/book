@@ -1,0 +1,105 @@
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_BsiLayout";
+}
+<div class="register-form">
+    <div id="registerForm">
+        <div class="register-title">Register</div>
+        <div class="register-input-group">
+            <label class="form-label">請輸入帳號</label>
+            <input type="text" class="form-control" name="Account" placeholder="請輸入帳號..." required>
+        </div>
+        <div class="register-input-group">
+            <label class="form-label">請輸入密碼</label>
+            <input type="password" class="form-control" name="Pwd" placeholder="請輸入密碼..." required>
+        </div>
+        <div class="register-input-group">
+            <label class="form-label">請輸入使用者名稱</label>
+            <input type="text" class="form-control" name="UName" placeholder="請輸入使用者密碼..." required>
+        </div>
+        <div class="register-input-group">
+            <label class="form-label">請輸入Email</label>
+            <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="請輸入Email...">
+        </div>
+        <div class="register-input-group">
+            <label class="form-label">請輸入手機號碼</label>
+            <input type="text" class="form-control" name="Phone" placeholder="請輸入手機號碼..." required>
+        </div>
+        <div style="margin:60px auto 60px;width: 157px;height: 46px;">
+            <button type="submit" class="register-btn">註冊</button>
+        </div>
+    </div>
+</div>
+<style>
+body {
+    background-image: url('/Images/loginPage.png');
+    background-position: center;
+    background-size: 80%;
+}
+.register-form {
+  background-color: rgba(255,255,255,0.64);
+  position: relative;
+  width: 70%;
+  height: 768px;
+  margin: 0 auto;
+  padding-top: 100px;
+  margin-top: 90px;
+}
+.register-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: 5px;
+    text-align: center;
+}
+/*.register-input{*/
+input.form-control{
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*background-color: #FFFFFF;*/
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.form-label{
+    margin: 2px 0px;
+}
+
+.register-input-group {
+    margin:0 auto 40px;
+    width: 70%;
+    height: 46px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.register-btn {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    background: rgba(0,0,0,0.8);
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    transition: all .3s ease;
+}
+.register-btn:hover{
+    transform: scale(1.125);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    transition: all .3s ease;
+    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125));
+}
+</style>
+<script src='@Url.Content("~/Scripts/UserModule.js")'></script>

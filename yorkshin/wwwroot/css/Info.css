@@ -1,0 +1,84 @@
+/*Info Area*/
+.Info-wrapper {
+    display: flex;
+    justify-content: center;/*水平置中*/
+    align-items: center; /*垂直置中*/
+    height: 500px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.Info-wrapper .Info-container{
+    border: #000000 1px solid;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px ;
+}
+.Info-wrapper .Info-container .Info-upper{
+    padding: 20px;
+}
+.Info-wrapper .Info-container .Info-upper .book-Info{
+    font-size: 22px;
+    font-weight: 700;
+}
+.Info-wrapper .Info-container .Info-upper .book-Info-2{
+    color: #b3b3b3;
+}
+.Info-wrapper .Info-buttom{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;}
+.Info-wrapper .Info-buttom .Info-img{
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    height: 250px;
+    border: #000000 1px solid;
+}
+.Info-wrapper .Info-buttom img{
+    height: 100%;
+    max-width: 100%;
+}
+.Info-wrapper .Info-buttom .Info-content{
+    padding-left: 50px;}
+.Info-wrapper .Info-buttom .Info-content .Info-text-1{
+    border-bottom:#AEB2BA 1px solid;}
+.Info-wrapper .Info-buttom .Info-content .Info-order-area{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin-top:20px ;
+    border:#AEB2BA 1px solid;
+}
+.Info-wrapper .Info-buttom .Info-content .book-name{
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 5px;
+}
+
+.Info-wrapper .Info-buttom .Info-content .price{
+    font-size: 18px;
+    font-weight: 700;
+    color: #0000FF;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 5px;
+}
+
+.Info-wrapper .Info-buttom .Info-content .Info-text-2{
+    padding-top: 10px;
+}
+
+.Info-wrapper .Info-buttom .Info-content .Info-order-area{
+    margin-top: 20px;
+    padding: 20px;
+}
+.Info-wrapper .Info-buttom .Info-content .Info-order-area button{
+    margin-right: 20px;
+    color: #0000FF;
+    border: #0000FF 1px solid;
+    transition: 2s;
+}
+.Info-wrapper .Info-buttom .Info-content .Info-order-area button:hover {
+    color:#ffffff;
+    /*background-color: #0000FF;*/
+    box-shadow:  0 200px #0000FF inset;
+}

@@ -1,0 +1,238 @@
+@* @model TModel *@
+<div>
+    <div id="comment" class="container">
+        <!-- comment rating-->
+        <div class="start_comment">
+            <div class="row">
+                <div class="col-lg-12">
+                    @{
+                        var tempRanking = 0;
+                        foreach (var comment in Model)
+                        {
+                            if (comment.Ranking != null)
+                            {
+                                tempRanking += (int)comment.Ranking;
+                            }
+                        }
+                        int averageRanking = 0;
+                        if (Model.Count !=0)
+                        {
+                            averageRanking = tempRanking / Model.Count;
+                            <div class="star-rating p-3" data-ranking="@averageRanking">
+                                <span >@averageRanking /5</span>
+                                <span class="rating-value"></span>
+                                <span class="fa fa-star" data-rating="1"></span>
+                                <span class="fa fa-star" data-rating="2"></span>
+                                <span class="fa fa-star" data-rating="3"></span>
+                                <span class="fa fa-star" data-rating="4"></span>
+                                <span class="fa fa-star" data-rating="5"></span>
+                                <input type="hidden" name="whatever1" class="rating-value" value="@averageRanking">
+                            </div>
+                            <script>
+                        $(document).ready(function() {
+                          let avg_rating = $('#comment .star-rating[data-ranking =@averageRanking] .fa');
+                          SetRatingStar(avg_rating);
+                          function SetRatingStar(avg_rating) {
+                              let rankingValue = @averageRanking;
+                              avg_rating.each(function() {
+                                  if (rankingValue >= parseInt($(this).data('rating'))) {
+                                      console.log("新增")
+                                      $(this).removeClass('fa-star-o').addClass('fa-star');
+                                  } else {
+                                      console.log("刪除");
+                                      $(this).removeClass('fa-star').addClass('fa-star-o');
+                                  }
+                              });
+                          }
+                        })
+                        </script>
+                            
+                        }
+                        else
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                        </symbol>
+                                        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                        </symbol>
+                                        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </symbol>
+                                    </svg>
+                                    <div class="alert alert-primary d-flex align-items-center mt-4" role="alert">
+                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                        <div>
+                                            尚未有評論
+                                        </div>
+                                    </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- comment rating -->
+        <!-- comment board-->
+        @model List<yorkshin.ViewModels.CommentListViewModel>
+        @foreach (var comment in Model.Take(3))
+        {
+            <div class="comment_board border-bottom p-lg-4">
+                <div class="row mb-3">
+                    <div class="CommentImg col-md-2 d-flex justify-content-center">
+                        <img src="/Images/Upload/@comment.ImgUrl" width="100px" alt="book img"/>
+                    </div>
+                    <div class="col-md">
+                        <div class="card p-3">
+                            <div class="row  d-flex ">
+                                <h6 style="font-weight: bolder ">@comment.BookName</h6>
+                                <div class="user d-flex  align-items-center">
+                                   <img width="48" height="48" src="https://img.icons8.com/color/48/user-male-circle--v1.png" alt="user-male-circle--v1"/>
+                                    @*<span class="material-symbols-outlined">
+                                    account_circle
+                                    </span>*@
+                                    <span class="font-weight-bold text-primary m-2">@comment.BuyerUname</span>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="comment-start" data-ranking="@comment.Ranking">
+                                                <span class="fa fa-star" data-rating="1"></span>
+                                                <span class="fa fa-star" data-rating="2"></span>
+                                                <span class="fa fa-star" data-rating="3"></span>
+                                                <span class="fa fa-star" data-rating="4"></span>
+                                                <span class="fa fa-star" data-rating="5"></span>
+                                                <input type="hidden" name="whatever1" class="rating-value" value="@comment.Ranking">
+                                                <span class="rating-value" hidden="">@comment.Ranking</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="CommentDate text-muted align-items-center d-flex justify-item-end "> @comment.CommentDate</div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center m-md-1">
+                                    <small class="align-items-center justify-content-center d-flex font-weight-bold">@comment.BuyerReview</small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            // 當文件載入完成後執行
+            $(document).ready(function() {
+                let star_rating = $('.comment-start[data-ranking="@comment.Ranking"] .fa');
+                
+                SetRatingStar(star_rating);
+    
+                function SetRatingStar(star_rating) {
+                    let rankingValue = parseInt(star_rating.siblings('.rating-value').text());
+                    
+                    star_rating.each(function() {
+                        if (rankingValue >= parseInt($(this).data('rating'))) {
+                            $(this).removeClass('fa-star-o').addClass('fa-star');
+                        } else {
+                            $(this).removeClass('fa-star').addClass('fa-star-o');
+                        }
+                    });
+                }
+            });
+            </script>
+        }
+        <!-- comment board-->
+        <div class="d-flex justify-content-center mx-auto p-3">
+            <button id="showMoreBtn" type="button" class="btn btn-dark">
+                更多
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </button>
+        </div>
+        <!-- 显示全部留言的容器 -->
+        <div id="allCommentsContainer" style="display: none;">
+            <!-- 显示全部留言 -->
+            @foreach (var comment in Model.Skip(3))
+            {
+                <div class="comment_board border-bottom p-lg-4">
+                <div class="row mb-3">
+                    <div class="CommentImg col-md-2 d-flex justify-content-center">
+                        <img src="/Images/Upload/@comment.ImgUrl" width="100px" alt="book img"/>
+                    </div>
+                    <div class="col-md">
+                        <div class="card p-3">
+                            <div class="row  d-flex ">
+                                <h6 style="font-weight: bolder ">@comment.BookName</h6>
+                                <div class="user d-flex  align-items-center">
+                                   <img width="48" height="48" src="https://img.icons8.com/color/48/user-male-circle--v1.png" alt="user-male-circle--v1"/>
+                                    @*<span class="material-symbols-outlined">
+                                    account_circle
+                                    </span>*@
+                                    <span class="font-weight-bold text-primary m-2">@comment.BuyerUname</span>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="comment-start" data-ranking="@comment.Ranking">
+                                                <span class="fa fa-star" data-rating="1"></span>
+                                                <span class="fa fa-star" data-rating="2"></span>
+                                                <span class="fa fa-star" data-rating="3"></span>
+                                                <span class="fa fa-star" data-rating="4"></span>
+                                                <span class="fa fa-star" data-rating="5"></span>
+                                                <input type="hidden" name="whatever1" class="rating-value" value="@comment.Ranking">
+                                                <span class="rating-value" hidden="">@comment.Ranking</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="CommentDate text-muted align-items-center d-flex justify-item-end "> @comment.CommentDate</div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center m-md-1">
+                                    <small class="align-items-center justify-content-center d-flex font-weight-bold">@comment.BuyerReview</small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            // 當文件載入完成後執行
+            $(document).ready(function() {
+                let star_rating = $('.comment-start[data-ranking="@comment.Ranking"] .fa');
+                
+                SetRatingStar(star_rating);
+    
+                function SetRatingStar(star_rating) {
+                    let rankingValue = parseInt(star_rating.siblings('.rating-value').text());
+                    
+                    star_rating.each(function() {
+                        if (rankingValue >= parseInt($(this).data('rating'))) {
+                            $(this).removeClass('fa-star-o').addClass('fa-star');
+                        } else {
+                            $(this).removeClass('fa-star').addClass('fa-star-o');
+                        }
+                    });
+                }
+            });
+            </script>
+            }
+        </div>
+    </div>
+
+</div>
+<script>
+    // 等待页面加载完成
+    $(document).ready(function () {
+        // 获取按钮和留言容器
+        var showMoreBtn = $('#showMoreBtn');
+        var allCommentsContainer = $('#allCommentsContainer');
+        $('#showMoreBtn').hide();
+        if ($('.comment_board').length >3){
+            // 隐藏"更多"按钮
+            showMoreBtn.show();
+        }
+        // 点击按钮时显示全部留言
+        showMoreBtn.on('click', function () {
+            // 显示全部留言容器
+            allCommentsContainer.show();
+            console.log("allCommentsContainer.show();");
+            
+            // 隐藏"更多"按钮
+            showMoreBtn.hide();
+            console.log("showMoreBtn.hide();");
+        });
+    });
+</script>

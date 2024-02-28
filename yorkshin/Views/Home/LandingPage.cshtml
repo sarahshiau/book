@@ -1,0 +1,198 @@
+﻿@using yorkshin.Controllers
+@model List<yorkshin.ViewModels.BookViewModel>
+
+@{
+    ViewData["Title"] = "Landing Page";
+    // 根據條件設定 Layout
+    Layout = ViewBag.UseBsi ? "_BsiLayout" : "_AsiLayout";
+}
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+</svg>
+<div class="LandingWrapper">
+    <div class="LandingPageBody">
+        <div class="LandingPageContent">
+            <div class="LandingPageSlogan">將書籍知識傳遞給需要的人</div>
+            @if (!ViewBag.UseBsi)
+            {
+                <form id="landingPageForm" asp-controller="Home" asp-action="LandingPage">
+                    <div class="LandingPageSearch">
+                        <input id="searchInput" type="text" class="search-input" placeholder="請輸入關鍵字..." name="searchWords">
+                        <a href="#" class="search-icon">
+                            <i class="fa fa-search" onclick="submitForm()"></i>
+                        </a>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+@if (!ViewBag.UseBsi)
+{
+    <div class="CardTitle">
+        <h2>書籍商品列表</h2>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.FirstOrDefault()?.SearchWords))
+    {
+        <div class="mb-5" id="searchResult">
+            <h2 style="color: #FFFFFF; font-size: 24px;font-weight: 300">
+                "
+                <span style="color: #D4003B; letter-spacing: 4px;font-weight: 700">@Model.FirstOrDefault()?.SearchWords</span>
+                " 相關的賣場
+            </h2>
+        </div>
+    }
+    else if (Model.FirstOrDefault()?.SearchWords == "")
+    {
+        
+    }
+    else
+    {
+        <div class="mb-5" id="searchResult">
+            <h2 style="color: white">
+                <div class="alert alert-danger d-flex align-items-center justify-content-center" style="margin: 5px 100px 20px 100px" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                        <use xlink:href="#exclamation-triangle-fill"/>
+                    </svg>
+                    <div>
+                        無相關賣場
+                    </div>
+                </div>
+
+            </h2>
+        </div>
+    }
+
+
+    var randomOrderModel = Model.OrderBy(x => Guid.NewGuid());
+    <div class="card-wrapper" id="showscroll">
+
+        @foreach (var book in randomOrderModel.Take(9))
+        {
+            <a class="card-container text-decoration-none" href="@Url.Action("OrderPage", "Order", new { bookId = book.Bid })" method="post">
+
+                @* <div class="CardBox"> *@
+                @* @foreach (var book in @Model) *@
+                @* { *@
+                @*      *@
+                @*     <a class="card-container text-decoration-none" href="@Url.Action("OrderPage", "Order", new { bookId = book.Bid })" method="post"> *@
+
+
+                <div class="card-content">
+                    <div class="card-right">
+                        <div class="card-img">
+                            <img src="/Images/Upload/@book.ImgUrl" alt="">
+                        </div>
+                    </div>
+                    <div class="card-left">
+                        <div class="BuyerGroup d-flex">
+                            <img width="24" height="24" src="https://img.icons8.com/material-rounded/24/user-male-circle.png" alt="user-male-circle"/>
+                            <div class="card-account">賣家： @book.Seller</div>
+                        </div>
+                        <div class="card-Info">
+                            <div class="card-name">@book.BName</div>
+                            <div class="card-author">作者： @book.Author</div>
+                        </div>
+                        <div class="card-price">NT＄@book.Price</div>
+                    </div>
+                </div>
+
+            </a>
+        }
+
+
+
+        @foreach (var book in randomOrderModel.Skip(9))
+        {
+            <a class="allBooksContainer card-container text-decoration-none" style="display: none" href="@Url.Action("OrderPage", "Order", new { bookId = book.Bid })" method="post">
+                <div class="card-content">
+                    <div class="card-right">
+                        <div class="card-img">
+                            <img src="/Images/Upload/@book.ImgUrl" alt="">
+                        </div>
+                    </div>
+                    <div class="card-left">
+                        <div class="BuyerGroup d-flex">
+                            <img width="24" height="24" src="https://img.icons8.com/material-rounded/24/user-male-circle.png" alt="user-male-circle"/>
+                            <div class="card-account">賣家： @book.Seller</div>
+                        </div>
+                        <div class="card-Info">
+                            <div class="card-name">@book.BName</div>
+                            <div class="card-author">作者： @book.Author</div>
+                        </div>
+                        <div class="card-price">NT＄@book.Price</div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+    <div id="scrollToBottomMarker"></div>
+    <div class="d-flex justify-content-center mx-auto p-3">
+        <button id="showMoreBtn" type="button" class="btn btn-dark">
+            更多
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </button>
+    </div>
+}
+
+<style>
+body{
+    background-color: #191410;
+}
+.LandingWrapper{
+    background-image: url("./Images/LadingPageBG.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* 讓 body 元素占滿整個視窗高度 */
+    margin: 0; /* 清除 body 元素的 margin */
+}
+/*.card-container:hover{*/
+/*  transform: translateY(-5px);*/
+/*}*/
+#searchInput{
+    border-radius: 5px;
+}
+#searchResult{
+    text-align: center;
+    font-size: 28px;
+}
+</style>
+<script>
+    // 等待頁面载入完成
+    $(document).ready(function () {
+        // 獲取按钮和留言
+        var showMoreBtn = $('#showMoreBtn');
+        var allBooksContainer = $('.allBooksContainer');
+        showMoreBtn.hide();
+        if ($('.card-container').length > 9){
+            // 隐藏"更多"按鈕
+            showMoreBtn.show();
+        }
+        // 點擊按鈕時顯示全部留言
+        showMoreBtn.on('click', function () {
+            // 顯示全部留言
+            allBooksContainer.show();
+            console.log("allBooksContainer.show();");
+            
+            // 隐藏"更多"按钮
+            showMoreBtn.hide();
+            console.log("showMoreBtn.hide();");
+        });
+        
+        //搜尋後下滑看結果
+         var scrollToBottomMarker = document.getElementById('searchResult');
+        
+          if (scrollToBottomMarker) {
+            // 使用 scrollIntoView 將畫面滾動到這個標識元素的位置
+            scrollToBottomMarker.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+    });
+    function submitForm(){
+        $('#landingPageForm').submit();
+        
+    }
+</script>
